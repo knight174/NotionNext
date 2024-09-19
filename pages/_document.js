@@ -29,22 +29,32 @@ class MyDocument extends Document {
               />
             </>
           )}
-        </Head>
           {BLOG.FONT_URL?.map((fontUrl, index) => {
             if (fontUrl.endsWith('.css')) {
-              return <link key={index} rel="stylesheet" href={fontUrl} />
+              return <link key={index} rel='stylesheet' href={fontUrl} />
             } else {
-              return <link key={index} rel="preload" href={fontUrl} as="font" type="font/woff2" />
+              return (
+                <link
+                  key={index}
+                  rel='preload'
+                  href={fontUrl}
+                  as='font'
+                  type='font/woff2'
+                />
+              )
             }
           })}
-          <script async src="https://analytics.miaoosi.com/script.js" data-website-id="c0e95e0d-4731-4351-9dec-133805972532"></script>
+          <script
+            async
+            src='https://analytics.miaoosi.com/script.js'
+            data-website-id='c0e95e0d-4731-4351-9dec-133805972532'></script>
         </Head>
 
         <body className={`${BLOG.FONT_STYLE} font-light scroll-smooth`}>
-            <Main />
-            <NextScript />
+          <Main />
+          <NextScript />
         </body>
-        </Html>
+      </Html>
     )
   }
 }
