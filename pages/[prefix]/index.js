@@ -31,7 +31,7 @@ const Slug = props => {
 
   /**
    * 验证文章密码
-   * @param {*} result
+   * @param {*} passInput
    */
   const validPassword = passInput => {
     if (!post) {
@@ -82,7 +82,7 @@ const Slug = props => {
     }
   }, [router, lock])
 
-  props = { ...props, lock, setLock, validPassword }
+  props = { ...props, lock, validPassword }
   // 根据页面路径加载不同Layout文件
   const Layout = getLayoutByTheme({
     theme: siteConfig('THEME'),
