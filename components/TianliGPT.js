@@ -32,6 +32,7 @@ const TianLiGPT = () => {
 
     window.tianliGPT_postSelector = '#notion-article'
     window.tianliGPT_key = tianliKey
+    window.tianliGPT_postURL = '*/article/*' // 只对文章页面生效
 
     await loadExternalResource(tianliJs, 'js')
   }
