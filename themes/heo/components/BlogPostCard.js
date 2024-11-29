@@ -33,7 +33,7 @@ const BlogPostCard = ({ index, post, showSummary, siteInfo }) => {
       <div
         data-wow-delay='.2s'
         className={
-          (POST_TWO_COLS ? '2xl:h-96 2xl:flex-col' : '') +
+          (POST_TWO_COLS ? 'xl:h-96 xl:flex-col' : '') +
           ' wow fadeInUp border bg-white dark:bg-[#1e1e1e] flex mb-4 flex-col h-[23rem] md:h-52 md:flex-row  group w-full dark:border-gray-600 hover:border-indigo-600  dark:hover:border-yellow-600 duration-300 transition-colors justify-between overflow-hidden rounded-xl'
         }>
         {/* 图片封面 */}
@@ -41,7 +41,7 @@ const BlogPostCard = ({ index, post, showSummary, siteInfo }) => {
           <Link href={post?.href} passHref legacyBehavior>
             <div
               className={
-                (POST_TWO_COLS ? ' 2xl:w-full' : '') +
+                (POST_TWO_COLS ? ' xl:w-full' : '') +
                 ' w-full md:w-5/12 overflow-hidden cursor-pointer select-none'
               }>
               <LazyImage
@@ -57,7 +57,7 @@ const BlogPostCard = ({ index, post, showSummary, siteInfo }) => {
         {/* 文字区块 */}
         <div
           className={
-            (POST_TWO_COLS ? '2xl:p-4 2xl:h-48 2xl:w-full' : '') +
+            (POST_TWO_COLS ? 'xl:p-4 xl:h-48 xl:w-full' : '') +
             ' flex p-6  flex-col justify-between h-48 md:h-full w-full md:w-7/12'
           }>
           <header>
@@ -83,9 +83,9 @@ const BlogPostCard = ({ index, post, showSummary, siteInfo }) => {
               }>
               {siteConfig('POST_TITLE_ICON') && (
                 <NotionIcon
-                icon={post.pageIcon}
-                className="heo-icon w-6 h-6 mr-1 align-middle transform translate-y-[-8%]" // 专门为 Heo 主题的图标设置样式
-              />
+                  icon={post.pageIcon}
+                  className='heo-icon w-6 h-6 mr-1 align-middle transform translate-y-[-8%]' // 专门为 Heo 主题的图标设置样式
+                />
               )}
               <span className='menu-link '>{post.title}</span>
             </Link>
