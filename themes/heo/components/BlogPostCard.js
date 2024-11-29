@@ -4,7 +4,7 @@ import { siteConfig } from '@/lib/config'
 import Link from 'next/link'
 import CONFIG from '../config'
 import TagItemMini from './TagItemMini'
-
+import PayMark from './chaos-components/pay-mark'
 const BlogPostCard = ({ index, post, showSummary, siteInfo }) => {
   const showPreview =
     siteConfig('HEO_POST_LIST_PREVIEW', null, CONFIG) && post.blockMap
@@ -26,6 +26,12 @@ const BlogPostCard = ({ index, post, showSummary, siteInfo }) => {
     true,
     CONFIG
   )
+
+  // 付费标记是否显示
+  const payMarkVisible =
+    siteConfig('HEO_ARTICLE_PAY', null, CONFIG) &&
+    post.tags.length > 0 &&
+    post.tags.includes('付费')
 
   return (
     <article
@@ -53,7 +59,6 @@ const BlogPostCard = ({ index, post, showSummary, siteInfo }) => {
             </div>
           </Link>
         )}
-
         {/* 文字区块 */}
         <div
           className={
@@ -87,7 +92,9 @@ const BlogPostCard = ({ index, post, showSummary, siteInfo }) => {
                   className='heo-icon w-6 h-6 mr-1 align-middle transform translate-y-[-8%]' // 专门为 Heo 主题的图标设置样式
                 />
               )}
-              <span className='menu-link '>{post.title}</span>
+              <span className='menu-link '>
+                {post.title} {payMarkVisible && <PayMark />}
+              </span>
             </Link>
           </header>
 
