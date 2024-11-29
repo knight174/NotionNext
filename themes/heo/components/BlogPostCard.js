@@ -5,6 +5,7 @@ import Link from 'next/link'
 import CONFIG from '../config'
 import TagItemMini from './TagItemMini'
 import PayMark from './chaos-components/pay-mark'
+
 const BlogPostCard = ({ index, post, showSummary, siteInfo }) => {
   const showPreview =
     siteConfig('HEO_POST_LIST_PREVIEW', null, CONFIG) && post.blockMap
@@ -44,7 +45,14 @@ const BlogPostCard = ({ index, post, showSummary, siteInfo }) => {
         }>
         {/* 图片封面 */}
         {showPageCover && (
-          <Link href={post?.href} passHref legacyBehavior>
+          <Link
+            href={
+              payMarkVisible
+                ? `/official-account` // 付费专栏跳转到公众号
+                : post?.href
+            }
+            passHref
+            legacyBehavior>
             <div
               className={
                 (POST_TWO_COLS ? ' xl:w-full' : '') +
@@ -81,7 +89,11 @@ const BlogPostCard = ({ index, post, showSummary, siteInfo }) => {
 
             {/* 标题和图标 */}
             <Link
-              href={post?.href}
+              href={
+                payMarkVisible
+                  ? `/official-account` // 付费专栏跳转到公众号
+                  : post?.href
+              }
               passHref
               className={
                 ' group-hover:text-indigo-700 dark:hover:text-yellow-700 dark:group-hover:text-yellow-600 text-black dark:text-gray-100  line-clamp-2 replace cursor-pointer text-xl font-extrabold leading-tight'
@@ -93,7 +105,8 @@ const BlogPostCard = ({ index, post, showSummary, siteInfo }) => {
                 />
               )}
               <span className='menu-link '>
-                {post.title} {payMarkVisible && <PayMark />}
+                {post.title}
+                {payMarkVisible && <PayMark />}
               </span>
             </Link>
           </header>
