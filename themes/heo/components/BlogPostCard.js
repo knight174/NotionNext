@@ -104,10 +104,10 @@ const BlogPostCard = ({ index, post, showSummary, siteInfo }) => {
                   className='heo-icon w-6 h-6 mr-1 align-middle transform translate-y-[-8%]' // 专门为 Heo 主题的图标设置样式
                 />
               )}
-              <span className='menu-link '>
-                {post.title}
-                {payMarkVisible && <PayMark />}
-              </span>
+              <div>
+                {payMarkVisible && <PayMark className='ml-1' />}{' '}
+                <span className='menu-link'>{post.title}</span>
+              </div>
             </Link>
           </header>
 
