@@ -1,7 +1,7 @@
 import LazyImage from '@/components/LazyImage'
 import NotionIcon from './NotionIcon'
 import { siteConfig } from '@/lib/config'
-import Link from 'next/link'
+import SmartLink from '@/components/SmartLink'
 import CONFIG from '../config'
 import TagItemMini from './TagItemMini'
 import PayMark from './chaos-components/pay-mark'
@@ -45,14 +45,7 @@ const BlogPostCard = ({ index, post, showSummary, siteInfo }) => {
         }>
         {/* 图片封面 */}
         {showPageCover && (
-          <Link
-            href={
-              payMarkVisible
-                ? `/official-account` // 付费专栏跳转到公众号
-                : post?.href
-            }
-            passHref
-            legacyBehavior>
+          <SmartLink href={post?.href} passHref legacyBehavior>
             <div
               className={
                 (POST_TWO_COLS ? ' xl:w-full' : '') +
@@ -65,7 +58,7 @@ const BlogPostCard = ({ index, post, showSummary, siteInfo }) => {
                 className='h-full w-full object-cover group-hover:scale-105 group-hover:brightness-75 transition-all duration-500 ease-in-out' //宽高都调整为自适应,保证封面居中
               />
             </div>
-          </Link>
+          </SmartLink>
         )}
         {/* 文字区块 */}
         <div
@@ -78,22 +71,18 @@ const BlogPostCard = ({ index, post, showSummary, siteInfo }) => {
             {post?.category && (
               <div
                 className={`flex mb-1 items-center ${showPreview ? 'justify-center' : 'justify-start'} hidden md:block flex-wrap dark:text-gray-300 text-gray-600 hover:text-indigo-700 dark:hover:text-yellow-500`}>
-                <Link
+                <SmartLink
                   passHref
                   href={`/category/${post.category}`}
                   className='cursor-pointer text-xs font-normal menu-link '>
                   {post.category}
-                </Link>
+                </SmartLink>
               </div>
             )}
 
             {/* 标题和图标 */}
-            <Link
-              href={
-                payMarkVisible
-                  ? `/official-account` // 付费专栏跳转到公众号
-                  : post?.href
-              }
+            <SmartLink
+              href={post?.href}
               passHref
               className={
                 ' group-hover:text-indigo-700 dark:hover:text-yellow-700 dark:group-hover:text-yellow-600 text-black dark:text-gray-100  line-clamp-2 replace cursor-pointer text-xl font-extrabold leading-tight'
@@ -104,11 +93,8 @@ const BlogPostCard = ({ index, post, showSummary, siteInfo }) => {
                   className='heo-icon w-6 h-6 mr-1 align-middle transform translate-y-[-8%]' // 专门为 Heo 主题的图标设置样式
                 />
               )}
-              <div>
-                {payMarkVisible && <PayMark className='ml-1' />}{' '}
-                <span className='menu-link'>{post.title}</span>
-              </div>
-            </Link>
+              <span className='menu-link '>{post.title}</span>
+            </SmartLink>
           </header>
 
           {/* 摘要 */}
