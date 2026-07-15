@@ -6,7 +6,7 @@ import mediumZoom from '@fisch0920/medium-zoom'
 import 'katex/dist/katex.min.css'
 import dynamic from 'next/dynamic'
 import { useEffect, useRef } from 'react'
-import { NotionRenderer } from 'react-notion-x'
+import { NotionRenderer, useNotionContext } from 'react-notion-x'
 
 /**
  * 整个站点的核心组件
@@ -120,10 +120,12 @@ const NotionPage = ({ post, className }) => {
         components={{
           Code,
           Collection,
+          Embed: NotionEmbed,
           Equation,
           Link: NotionLink,
           Modal,
           Pdf,
+          Quote: NotionQuote,
           Tweet
         }}
       />
@@ -139,6 +141,48 @@ const hasCodeBlock = blockMap => {
   if (!blocks) return false
   return Object.values(blocks).some(
     item => item?.value?.type === 'code'
+  )
+}
+
+const NotionEmbed = ({ block }) => {
+  const { recordMap } = useNotionContext()
+  const source =
+    recordMap?.signed_urls?.[block?.id] ||
+    block?.format?.display_source ||
+    block?.properties?.source?.[0]?.[0]
+  const isHtmlArtifact =
+    block?.type === 'embed' && block?.format?.embed_variant === 'html_artifact'
+  const srcDoc = isHtmlArtifact
+    ? block?.format?.html_artifact_content
+    : undefined
+
+  if (!srcDoc && (!source || source.startsWith('attachment:'))) return null
+
+  const height = block?.format?.block_height || (isHtmlArtifact ? 640 : 480)
+  const title =
+    block?.properties?.title?.[0]?.[0] ||
+    (isHtmlArtifact ? 'Notion HTML block' : 'iframe embed')
+
+  return (
+    <figure
+      className='notion-asset-wrapper notion-asset-wrapper-embed'
+      >
+      <div style={{ height, position: 'relative' }}>
+        <iframe
+          className='notion-asset-object-fit'
+          src={srcDoc ? undefined : source}
+          srcDoc={srcDoc}
+          title={title}
+          frameBorder='0'
+          loading='lazy'
+          scrolling='auto'
+          allowFullScreen={!isHtmlArtifact}
+          sandbox={
+            isHtmlArtifact ? 'allow-scripts allow-forms allow-popups' : undefined
+          }
+        />
+      </div>
+    </figure>
   )
 }
 
@@ -296,6 +340,40 @@ const Modal = dynamic(
 
 const Tweet = ({ id }) => {
   return <TweetEmbed tweetId={id} />
+}
+
+// Custom Quote override: react-notion-x drops quotes without properties.title
+// (returns null from early guard). This renders them correctly — fixes #4140.
+const NotionQuote = ({ block, children }) => {
+  const title = block?.properties?.title
+  return (
+    <blockquote className='notion-quote'>
+      {title && <NotionText value={title} />}
+      {children}
+    </blockquote>
+  )
+}
+
+// Minimal inline text renderer for Notion rich-text arrays.
+// Each segment is [plainText, [[formatType, optionalValue], ...]].
+const NotionText = ({ value }) => {
+  if (!Array.isArray(value)) return null
+  return value.map((segment, i) => {
+    if (!Array.isArray(segment) || !segment[0]) return null
+    const [text, formats] = segment
+    let element = <>{text}</>
+    if (Array.isArray(formats)) {
+      for (const fmt of formats) {
+        const type = Array.isArray(fmt) ? fmt[0] : fmt
+        if (type === 'b') element = <strong>{element}</strong>
+        else if (type === 'i') element = <em>{element}</em>
+        else if (type === 's') element = <s>{element}</s>
+        else if (type === 'c') element = <code>{element}</code>
+        else if (type === 'a') element = <a href={Array.isArray(fmt) ? fmt[1] : '#'}>{element}</a>
+      }
+    }
+    return <span key={i}>{element}</span>
+  })
 }
 
 export default NotionPage
