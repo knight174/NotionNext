@@ -37,6 +37,9 @@ const CONFIG = {
   HEO_HERO_RECOMMEND_POST_SORT_BY_UPDATE_TIME: false, // 推荐文章排序，为`true`时将强制按最后修改时间倒序
   //   HERO_RECOMMEND_COVER: 'https://cdn.pixabay.com/photo/2015/10/30/20/13/sunrise-1014712_1280.jpg', // 英雄区右侧图片
 
+  // 英雄区右侧推荐文章遮罩控制
+  HEO_HERO_RECOMMEND_COVER_ENABLE: false, // 是否显示推荐文章遮罩图片
+
   HEO_ARTICLE_PAY_POST_TAG: '付费', // 「自定义新增」文章关联付费
 
   // 右侧个人资料卡牌欢迎语，点击可自动切换
