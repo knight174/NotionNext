@@ -14,6 +14,10 @@ const CONFIG = {
   // 是否显示开始阅读按钮
   MATERY_SHOW_START_READING: true,
 
+  // 使用阅读导向首页：推荐文章、分类入口、最新文章与 RSS
+  MATERY_HOME_READING_LAYOUT:
+    process.env.NEXT_PUBLIC_MATERY_HOME_READING_LAYOUT === 'true',
+
   // 菜单配置
   MATERY_MENU_CATEGORY: true, // 显示分类
   MATERY_MENU_TAG: true, // 显示标签
@@ -34,6 +38,10 @@ const CONFIG = {
   MATERY_WIDGET_TO_TOP: true,
   MATERY_WIDGET_TO_COMMENT: true, // 跳到评论区
   WIDGET_DARK_MODE: true, // 夜间模式
-  MATERY_WIDGET_TOC: true // 移动端悬浮目录
+  MATERY_WIDGET_TOC: true, // 移动端悬浮目录
+
+  MATERY_COLOR_PRIMARY: '#4338ca',
+  MATERY_COLOR_PRIMARY_LIGHT: '#818cf8',
+  MATERY_COLOR_BG: '#f5f5f5'
 }
 export default CONFIG

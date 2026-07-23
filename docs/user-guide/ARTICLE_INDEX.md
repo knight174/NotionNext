@@ -21,6 +21,7 @@
 | 🚀 安装部署 | `vercel-deploy-notion-next-static` | [deploy/vercel-static.md](./deploy/vercel-static.md) |
 | 🚀 安装部署 | `vercel-redploy` | [deploy/vercel-redeploy.md](./deploy/vercel-redeploy.md) |
 | 🚀 安装部署 | `notion-next-cloud-flare` | [deploy/cloudflare-pages.md](./deploy/cloudflare-pages.md) |
+| 🚀 安装部署 | `notion-image-proxy` | [deploy/notion-image-proxy.md](./deploy/notion-image-proxy.md) |
 | 🚀 安装部署 | `deploy-notion-next-with-netlify` | [deploy/netlify.md](./deploy/netlify.md) |
 | 🚀 安装部署 | `deploy-notion-next-with-edge-one` | [deploy/edgeone-pages.md](./deploy/edgeone-pages.md) |
 | 🚀 安装部署 | `deploy-notion-next-on-vps` | [deploy/vps.md](./deploy/vps.md) |
@@ -57,6 +58,7 @@
 | 🛠 站点配置 | `notion-next-site-combine` | [config/notion-next-site-combine.md](./config/notion-next-site-combine.md) |
 | 🛠 站点配置 | `notion-next-api_base_url` | [config/notion-next-api_base_url.md](./config/notion-next-api_base_url.md) |
 | ⭐ 主题参数 | `notion-next-themes` | [themes/overview.md](./themes/overview.md) |
+| ⭐ 主题参数 | `notion-next-theme-console` | [themes/theme-console.md](./themes/theme-console.md) |
 | ⭐ 主题参数 | `notion-next-typography` | [themes/typography.md](./themes/typography.md) |
 | ⭐ 主题参数 | `notion-next-magzine` | [themes/magzine.md](./themes/magzine.md) |
 | ⭐ 主题参数 | `notion-next-proxio` | [themes/proxio.md](./themes/proxio.md) |
